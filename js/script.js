@@ -1,6 +1,7 @@
 'use strict';
 
 function titleClickHandler(event){
+  event.preventDefault(); // Zapobiegnięcie domyślnemu działaniu linków
   const clickedElement = this;
   console.log('Link was clicked!'); 
 
@@ -24,10 +25,17 @@ function titleClickHandler(event){
 
 
   /* get 'href' attribute from the clicked link */
+  const articleSelector = clickedElement.getAttribute('href'); // Pobranie wartości atrybutu 'href'
+  console.log('articleSelector:', articleSelector); // Wyświetlenie wartości articleSelector w konsoli
+
 
   /* find the correct article using the selector (value of 'href' attribute) */
+  const targetArticle = document.querySelector(articleSelector); // Wyszukanie artykułu na podstawie selektora
+  console.log('targetArticle:', targetArticle); // Wyświetlenie znalezionego artykułu w konsoli
+
 
   /* add class 'active' to the correct article */
+  targetArticle.classList.add('active'); // Dodanie klasy 'active' do znalezionego artykułu
 }
 
 const links = document.querySelectorAll('.titles a');
