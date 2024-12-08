@@ -23,6 +23,7 @@
             <aside class="sidebar">
               <h2 class="section-title">All posts</h2>
               <ul class="list titles">
+
                 <li><a href="#article-1" class="active"><span>Article 1</span></a></li>
                 <li><a href="#article-2"><span>Article 2</span></a></li>
                 <li><a href="#article-3"><span>Article 3</span></a></li>
@@ -33,6 +34,7 @@
                 <li><a href="#article-8"><span>Article 8</span></a></li>
                 <li><a href="#article-9"><span>Article 9</span></a></li>
                 <li><a href="#article-10"><span>Article 10</span></a></li>
+
               </ul>
             </aside>
             <section class="posts">
@@ -260,6 +262,38 @@
     <footer>
         <p>&copy; 2024 Stanisław Flak. Wszystkie prawa zastrzeżone.</p>
     </footer>
-    <script src="js/script.js"></script>
+    <script src="js/script.js">
+      
+      // Funkcja generująca listę linków w lewej kolumnie
+function generateTitleLinks() {
+    console.log("Funkcja generateTitleLinks została wykonana");
+
+    // 1. Usuń zawartość listy linków w lewej kolumnie
+    const titlesList = document.querySelector('.list.titles');
+    titlesList.innerHTML = '';
+
+    // 2. Znajdź wszystkie artykuły
+    const articles = document.querySelectorAll('.post');
+
+    // 3. Dla każdego artykułu wykonaj poniższe operacje
+    for (let article of articles) {
+        // Odczytaj id artykułu
+        const articleId = article.getAttribute('id');
+
+        // Znajdź element z tytułem i odczytaj jego zawartość
+        const articleTitle = article.querySelector('.post-title').innerHTML;
+
+        // Na podstawie tych informacji stwórz kod HTML linka
+        const linkHTML = `<li><a href="#${articleId}"><span>${articleTitle}</span></a></li>`;
+
+        // Wstaw stworzony kod HTML do listy linków w lewej kolumnie
+        titlesList.innerHTML += linkHTML;
+    }
+}
+
+// Wywołanie funkcji zaraz po załadowaniu skryptu
+generateTitleLinks();
+
+    </script>
 </body>
 </html>
