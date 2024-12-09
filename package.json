@@ -5,16 +5,17 @@
   "scripts": {
     "init-project": "npm install && npm-run-all init:*",
     "init:dirs": "mkdirp sass css vendor images js",
-    "init:files": "type nul > README.md && type nul > index.html && type nul > sass/style.scss && type nul > js/script.js",
-    "init:gitignore": "powershell -Command \"Invoke-WebRequest -Uri https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -OutFile .gitignore\"",
-    "test": "npm run test:html",
+    "init:files": "touch README.md index.html sass/style.scss js/script.js",
+    "init:gitignore": " curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "test": "npm-run-all test:*",
     "test:html": "html-validate *.html",
+    "test:js": "eslint js/",
     "build": "npm-run-all build:* test",
     "build:sass": "sass --style=compressed --no-source-map sass:css",
     "build:autoprefixer": "postcss css/*.css --use autoprefixer -d css",
     "build-dev": "npm-run-all build-dev:sass build:autoprefixer",
     "build-dev:sass": "sass --style=expanded --source-map sass:css",
-    "watch": "npm-run-all build build-dev -p watch:*",
+    "watch": "npm-run-all build:* build-dev -p watch:*",
     "watch:browsersync": "browser-sync start --server --files \"css/*.css\" \"*.html\" \"js/*.js\"",
     "watch:sassprefixer": "onchange sass/*.scss -- npm run build-dev"
   },
@@ -23,13 +24,15 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "html-validate": "^8.25.0",
-    "live-server": "^1.2.2",
+    "autoprefixer": "^10.2.4",
+    "browser-sync": "^3.0.3",
+    "eslint": "^8.56.0",
+    "html-validate": "^8.27.0",
     "mkdirp": "^3.0.1",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.1.0",
-    "postcss": "^8.4.49",
-    "postcss-cli": "^11.0.0",
+    "postcss": "^8.2.6",
+    "postcss-cli": "^8.3.1",
     "sass": "^1.81.0"
   }
 }
