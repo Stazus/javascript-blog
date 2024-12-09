@@ -58,7 +58,7 @@ function generateTitleLinks(){
   const titleList = document.querySelector(optTitleListSelector); // Znalezienie listy linków
   titleList.innerHTML = ''; // Wyczyszczenie zawartości listy linków
 
-  /* for each article */
+  /* Pętla dla wszystkich artykułów */
   const articles = document.querySelectorAll(optArticleSelector); // Wyszukanie wszystkich artykułów
 
   for (let article of articles) {
