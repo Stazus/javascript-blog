@@ -44,6 +44,7 @@ function titleClickHandler(event){
   targetArticle.classList.add('active'); // Dodanie klasy 'active' do znalezionego artykułu
 }
 
+// Dodanie obsługi kliknięć w linki
 const links = document.querySelectorAll('.titles a');
 
 for(let link of links){
@@ -54,19 +55,33 @@ for(let link of links){
 function generateTitleLinks(){
 
   /* remove contents of titleList */
+  const titleList = document.querySelector(optTitleListSelector); // Znalezienie listy linków
+  titleList.innerHTML = ''; // Wyczyszczenie zawartości listy linków
 
   /* for each article */
+  const articles = document.querySelectorAll(optArticleSelector); // Wyszukanie wszystkich artykułów
 
+  for (let article of articles) {
     /* get the article id */
+    const articleId = article.getAttribute('id');
+    console.log('Article ID:', articleId); // Wyświetlenie pobranego ID
 
     /* find the title element */
+    const titleElement = article.querySelector(optTitleSelector); // Znalezienie elementu z tytułem
+    console.log('Title Element:', titleElement);
 
     /* get the title from the title element */
+    const articleTitle = titleElement.innerHTML; // Pobranie treści tytułu
+    console.log('Article Title:', articleTitle);
 
     /* create HTML of the link */
+    const linkHTML = `<li><a href="#${articleId}">${articleTitle}</a></li>`; // Utworzenie HTML dla linku
+    console.log('Link HTML:', linkHTML);
 
     /* insert link into titleList */
-
+    titleList.insertAdjacentHTML('beforeend', linkHTML); // Dodanie linku do listy
+  }
 }
 
+// Wywołanie funkcji generującej linki
 generateTitleLinks();
