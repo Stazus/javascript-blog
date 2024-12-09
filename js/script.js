@@ -1,5 +1,11 @@
 'use strict';
 
+// Ustawienia skryptu
+const optArticleSelector = '.post',
+      optTitleSelector = '.post-title',
+      optTitleListSelector = '.titles';
+
+// Funkcja obsługująca kliknięcia w linki
 function titleClickHandler(event){
   event.preventDefault(); // Zapobiegnięcie domyślnemu działaniu linków
   const clickedElement = this;
@@ -43,3 +49,24 @@ const links = document.querySelectorAll('.titles a');
 for(let link of links){
   link.addEventListener('click', titleClickHandler);
 }
+
+// Funkcja generująca listę linków
+function generateTitleLinks(){
+
+  /* remove contents of titleList */
+
+  /* for each article */
+
+    /* get the article id */
+
+    /* find the title element */
+
+    /* get the title from the title element */
+
+    /* create HTML of the link */
+
+    /* insert link into titleList */
+
+}
+
+generateTitleLinks();
