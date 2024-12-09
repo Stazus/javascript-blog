@@ -72,7 +72,7 @@ function generateTitleLinks(){
 
     /* get the title from the title element */
     const articleTitle = titleElement.innerHTML; // Pobranie treści tytułu
-    console.log('Article Title:', articleTitle);
+    console.log('Article Title:', articleTitle); // Wyświetlenie tytułu artykułu
 
     /* create HTML of the link */
     const linkHTML = `<li><a href="#${articleId}">${articleTitle}</a></li>`; // Utworzenie HTML dla linku
