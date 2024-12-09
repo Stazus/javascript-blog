@@ -66,7 +66,7 @@ function generateTitleLinks(){
     const articleId = article.getAttribute('id');
     console.log('Article ID:', articleId); // Wyświetlenie pobranego ID
 
-    /* find the title element */
+    /* find the title element - odczytanie id artykułu */
     const titleElement = article.querySelector(optTitleSelector); // Znalezienie elementu z tytułem
     console.log('Title Element:', titleElement);
 
