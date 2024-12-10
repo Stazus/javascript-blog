@@ -19,8 +19,8 @@ function titleClickHandler(event){
   }
 
   /* [DONE] add class 'active' to the clicked link */
-  console.log('clickedElement:', clickedElement);
   clickedElement.classList.add('active'); // Dodanie klasy 'active' do klikniętego elementu
+  console.log('clickedElement:', clickedElement);
 
   /* [DONE] remove class 'active' from all articles */
   const activeArticles = document.querySelectorAll('.posts .active'); // Zmieniony selektor na odpowiedni dla artykułów
@@ -42,13 +42,6 @@ function titleClickHandler(event){
 
   /* add class 'active' to the correct article */
   targetArticle.classList.add('active'); // Dodanie klasy 'active' do znalezionego artykułu
-}
-
-// Dodanie obsługi kliknięć w linki
-const links = document.querySelectorAll('.titles a');
-
-for(let link of links){
-  link.addEventListener('click', titleClickHandler);
 }
 
 // Funkcja generująca listę linków
@@ -76,6 +69,12 @@ function generateTitleLinks(){
 
     /* insert link into titleList */
     titleList.insertAdjacentHTML('beforeend', linkHTML); // Dodanie linku do listy
+  }
+    // Dodanie obsługi kliknięć w linki
+  const links = document.querySelectorAll('.titles a');
+
+  for(let link of links){
+    link.addEventListener('click', titleClickHandler);
   }
 }
 
