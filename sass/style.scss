@@ -1,32 +1,93 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:400,600|Sacramento|Source+Sans+Pro:300&subset=latin-ext');
 
-/* Variables */
+/* Variables - Zmienne ułatwiające zarządzanie kolorami, czcionkami 
+    i innymi powtarzającymi się wartościami.*/
 
-$color-light: #fff;
-$color-dark: #444;
+$color-light: #fff; // Jasny kolor tła
+$color-dark: #444; // Ciemny kolor tekstu
+$color-accent: #3498db; // Kolor akcentu (np. linki, nagłówki)
+$color-accent-light: lighten($color-accent, 20%); // Jaśniejszy odcień koloru akcentu
+$color-muted: #888; // Kolor zgaszonego tekstu
 
-$font-logo: 'Sacramento', cursive;
-$font-header: 'Oswald', sans-serif;
-$font-text: 'Source Sans Pro', sans-serif;
 
-/* Global */
+$font-logo: 'Sacramento', cursive; // Czcionka dla logo
+$font-header: 'Oswald', sans-serif; // Czcionka dla nagłówków
+$font-text: 'Source Sans Pro', sans-serif; // Czcionka dla tekstu
+
+$border-radius: 5px; // Promień zaokrąglenia krawędzi
+$font-small: 14px; // Rozmiar małego tekstu
+
+
+/* Global - Ogólne style stosowane w całej aplikacji.*/
 
 *, *::before, *::after {
-  box-sizing: border-box;
+  box-sizing: border-box; // Ustawienie modelu pudełkowego
+}
+
+html, body {
+  margin: 0; // Usunięcie marginesów domyślnych
+  padding: 0; // Usunięcie paddingu domyślnego
 }
 
 body {
-  background: $color-light;
-  font-family: $font-text;
-  color: $color-dark;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 1.7;
+  background: $color-light; // Jasne tło
+  font-family: $font-text; // Czcionka dla treści
+  color: $color-dark; // Kolor tekstu
+  font-weight: 300; // Lekka waga czcionki
+  font-size: 16px; // Domyślny rozmiar tekstu
+  line-height: 1.7; // Wysokość linii dla lepszej czytelności
+}
+
+a {
+  color: $color-accent; // Linki w kolorze akcentu
+  text-decoration: none; //Bez podkreślenia 
+  &:hover {
+    text-decoration: underline; // Podkreślenie przy najechaniu
+  }
 }
 
 .container {
-  max-width: 1140px;
-  margin: 0 auto;
+  max-width: 1140px; // Maksymalna szerokość kontenera
+  margin: 0 auto; // Wyśrodkowanie kontenera
+}
+
+/* Headers */
+
+header {
+  background: $color-accent; // Tło nagłówka w kolorze akcentu
+  color: $color-light; // Tekst nagłówka w jasnym kolorze
+  padding: 20px 0; //Wewnętrzny odstęp
+  text-align: center; // Wyśrodkowanie treści
+
+  h1 {
+    margin: 0;
+    font-family: $font-header;
+    font-weight: 600;
+    font-size: 36px;
+  }
+
+  nav {
+    margin-top: 10px;
+
+    .list-horizontal {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin: 0 10px;
+
+        a {
+          color: $color-light;
+
+          &:hover {
+            color: $color-accent-light;
+          }
+        }
+      }
+    }
+  }
 }
 
 .section-title {
@@ -46,23 +107,45 @@ body {
 .wrapper {
   display: flex;
   margin-left: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .sidebar {
   flex: 1 0 0;
+  margin-right: 10px;
+  padding: 40px;
+  background: $color-light;
+  border: 1px solid $color-dark;
+  border-radius: $border-radius;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 }
 
 .posts {
   flex: 2 0 0;
+  padding: 40px;
+  background: $color-light;
+  border: 1px solid $color-dark;
+  border-radius: $border-radius;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+  }
 }
 
-.sidebar, .posts {
-  background: $color-light;
-  margin-right: 10px;
-  padding: 40px;
-  border: 1px solid $color-dark;
-  border-radius: 5px;
-}
+// .sidebar, .posts {
+//   background: $color-light;
+//   margin-right: 10px;
+//   padding: 40px;
+//   border: 1px solid $color-dark;
+//   border-radius: 5px;
+// }
 
 /* Logo */
 
@@ -72,6 +155,10 @@ body {
   font-size: 104px;
   line-height: 1;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 72px;
+  }
 }
 
 /* Lists */
@@ -80,6 +167,7 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
+
   .active {
     font-weight: bold;
   }
@@ -99,24 +187,76 @@ body {
   }
 }
 
-/* Post */
+/* Post Styles */
 
-.post {
-  display: none;
-  &.active {
-    display: block;
+.posts .post {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: $color-light;
+  border: 1px solid $color-muted;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
-}
+
+  h2 {
+    font-family: $font-header;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
 
 .post-author {
+  margin-bottom: 10px;
   font-style: italic;
+  color: $color-muted;
 }
 
 .post-tags {
   display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+
   p {
     margin: 0 10px 0 0;
+    font-size: $font-small;
+    color: $color-accent;
+  }
+}
+}
+
+/* Footer */
+
+footer {
+  background: $color-dark;
+  color: $color-light;
+  padding: 10px 0;
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: $font-small;
   }
 }
 
-                   
+/* Media Queries */
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  header {
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  .posts .post h2 {
+    font-size: 20px;
+  }
+}
