@@ -131,7 +131,7 @@ function tagClickHandler(event){
   console.log('Selected tag:', tag);
 
   /* find all tag links with class active */
-  const activeLinks = document.querySelectorAll('.post-tags a.active');
+  const activeLinks = document.querySelectorAll('a.active[href^="#tag-"]');
 
   /* START LOOP: for each active tag link */
   for (let activeLink of activeLinks) {
@@ -151,7 +151,7 @@ function tagClickHandler(event){
   /* END LOOP: for each found tag link */
 
   /* execute function "generateTitleLinks" with article selector as argument */
-  generateTitleLinks();
+  generateTitleLinks(tag);
 }
 
 // Funkcja dodająca nasłuchiwacze do kliknięć w tagi
