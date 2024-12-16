@@ -47,6 +47,7 @@ function titleClickHandler(event){
 
 // Funkcja generująca listę linków
 function generateTitleLinks(customSelector = ''){
+  console.log('customSelector:', customSelector); // Debug: analiza argumentu
 
   /* remove contents of titleList */
   const titleList = document.querySelector(optTitleListSelector); // Znalezienie listy linków
@@ -54,6 +55,8 @@ function generateTitleLinks(customSelector = ''){
 
   /* Pętla dla wszystkich artykułów */
   const articles = document.querySelectorAll(optArticleSelector + customSelector); // Wyszukanie wszystkich artykułów
+  console.log('Articles selector:', optArticleSelector + customSelector); // Debug: sprawdzanie połączonego selektora
+  console.log('Found articles:', articles);
 
   for (let article of articles) {
     /* get the article id */
@@ -151,7 +154,7 @@ function tagClickHandler(event){
   /* END LOOP: for each found tag link */
 
   /* execute function "generateTitleLinks" with article selector as argument */
-  generateTitleLinks('[data-tags~="' + tag + '"]');
+  generateTitleLinks(`[data-tags~="${tag}"]`); // filtrowanie artykułów na podstawie tagów
 }
 
 // Funkcja dodająca nasłuchiwacze do kliknięć w tagi
