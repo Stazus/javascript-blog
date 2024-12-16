@@ -7,74 +7,68 @@ const optArticleSelector = '.post',
       optArticleTagsSelector = '.post-tags .list';
 
 // Funkcja obsługująca kliknięcia w linki
-function titleClickHandler(event){
+function titleClickHandler(event) {
   event.preventDefault(); // Zapobiegnięcie domyślnemu działaniu linków
   const clickedElement = this;
-  console.log('Link was clicked!'); 
+  console.log('Link was clicked!');
 
   /* [DONE] remove class 'active' from all article links  */
   const activeLinks = document.querySelectorAll('.titles a.active');
 
-  for(let activeLink of activeLinks){
-  activeLink.classList.remove('active');
+  for (let activeLink of activeLinks) {
+    activeLink.classList.remove('active');
   }
 
   /* [DONE] add class 'active' to the clicked link */
-  clickedElement.classList.add('active'); // Dodanie klasy 'active' do klikniętego elementu
+  clickedElement.classList.add('active');
   console.log('clickedElement:', clickedElement);
 
   /* [DONE] remove class 'active' from all articles */
-  const activeArticles = document.querySelectorAll('.posts .active'); // Zmieniony selektor na odpowiedni dla artykułów
+  const activeArticles = document.querySelectorAll('.posts .active');
 
   for (let activeArticle of activeArticles) {
     activeArticle.classList.remove('active');
   }
 
-
   /* get 'href' attribute from the clicked link */
-  const articleSelector = clickedElement.getAttribute('href'); // Pobranie wartości atrybutu 'href'
-  console.log('articleSelector:', articleSelector); // Wyświetlenie wartości articleSelector w konsoli
-
+  const articleSelector = clickedElement.getAttribute('href');
+  console.log('articleSelector:', articleSelector);
 
   /* find the correct article using the selector (value of 'href' attribute) */
-  const targetArticle = document.querySelector(articleSelector); // Wyszukanie artykułu na podstawie selektora
-  console.log('targetArticle:', targetArticle); // Wyświetlenie znalezionego artykułu w konsoli
-
+  const targetArticle = document.querySelector(articleSelector);
+  console.log('targetArticle:', targetArticle);
 
   /* add class 'active' to the correct article */
-  targetArticle.classList.add('active'); // Dodanie klasy 'active' do znalezionego artykułu
+  targetArticle.classList.add('active');
 }
 
 // Funkcja generująca listę linków
-function generateTitleLinks(){
-
+function generateTitleLinks(customSelector = '') {
   /* remove contents of titleList */
-  const titleList = document.querySelector(optTitleListSelector); // Znalezienie listy linków
-  titleList.innerHTML = ''; // Wyczyszczenie zawartości listy linków
+  const titleList = document.querySelector(optTitleListSelector);
+  titleList.innerHTML = '';
 
-  /* Pętla dla wszystkich artykułów */
-  const articles = document.querySelectorAll(optArticleSelector); // Wyszukanie wszystkich artykułów
+  /* find all articles */
+  const articles = document.querySelectorAll(optArticleSelector + customSelector);
 
+  /* for each article */
   for (let article of articles) {
     /* get the article id */
     const articleId = article.getAttribute('id');
-    console.log('Article ID:', articleId); // Wyświetlenie pobranego ID
 
     /* find the title element */
-    const articleTitle = article.querySelector(optTitleSelector).innerHTML; // Odczytanie tytułu artykułu
-    console.log('Article Title:', articleTitle); // Wyświetlenie tytułu artykułu
+    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
     /* create HTML of the link */
-    const linkHTML = `<li><a href="#${articleId}">${articleTitle}</a></li>`; // Utworzenie HTML dla linku
-    console.log('Link HTML:', linkHTML);
+    const linkHTML = `<li><a href="#${articleId}">${articleTitle}</a></li>`;
 
     /* insert link into titleList */
-    titleList.insertAdjacentHTML('beforeend', linkHTML); // Dodanie linku do listy
+    titleList.insertAdjacentHTML('beforeend', linkHTML);
   }
-    // Dodanie obsługi kliknięć w linki
-  const links = document.querySelectorAll('.titles a');
 
-  for(let link of links){
+  /* add event listeners to links */
+  const links = document.querySelectorAll('.titles a');
+  for (let link of links) {
     link.addEventListener('click', titleClickHandler);
   }
 }
@@ -121,7 +115,7 @@ function generateTags() {
 generateTags();
 
 // Funkcja obsługująca kliknięcia w tagi
-function tagClickHandler(event){
+function tagClickHandler(event) {
   event.preventDefault(); // Zapobiegnięcie domyślnemu działaniu linków
 
   const clickedElement = this; // Kliknięty element
@@ -151,11 +145,11 @@ function tagClickHandler(event){
   /* END LOOP: for each found tag link */
 
   /* execute function "generateTitleLinks" with article selector as argument */
-  generateTitleLinks(tag);
+  generateTitleLinks('[data-tags~="' + tag + '"]');
 }
 
 // Funkcja dodająca nasłuchiwacze do kliknięć w tagi
-function addClickListenersToTags(){
+function addClickListenersToTags() {
   /* find all links to tags */
   const tagLinks = document.querySelectorAll('.post-tags a');
 
