@@ -4,7 +4,8 @@
 const optArticleSelector = '.post',
       optTitleSelector = '.post-title',
       optTitleListSelector = '.titles',
-      optArticleTagsSelector = '.post-tags .list';
+      optArticleTagsSelector = '.post-tags .list',
+      optArticleAuthorSelector = '.post-author';
 
 // Funkcja obsługująca kliknięcia w linki
 function titleClickHandler(event){
@@ -83,7 +84,7 @@ function generateTitleLinks(customSelector = ''){
 }
 
 // Wywołanie funkcji generującej linki
-generateTitleLinks();
+// generateTitleLinks(); - usunięte
 
 // Funkcja generująca tagi
 function generateTags() {
@@ -172,3 +173,71 @@ function addClickListenersToTags(){
 
 // Wywołanie funkcji, aby dodać nasłuchiwacze do tagów
 addClickListenersToTags();
+
+// Funkcja generująca listę autorów dla każdego artykułu
+function generateAuthors() {
+  // Pobranie wszystkich artykułów na stronie
+  const articles = document.querySelectorAll(optArticleSelector);
+
+  // Iteracja przez każdy artykuł
+  for (let article of articles) {
+    // Znalezienie kontenera na autora w artykule
+    const authorWrapper = article.querySelector(optArticleAuthorSelector);
+
+    // Pobranie atrybutu z nazwą autora
+    const author = article.getAttribute('data-author');
+
+    // Utworzenie linku HTML z nazwą autora
+    const authorHTML = `<a href="#author-${author}">${author}</a>`;
+
+    // Wstawienie linku do kontenera w artykule
+    authorWrapper.innerHTML = authorHTML;
+  }
+}
+
+// Wywołanie funkcji generującej autorów
+generateAuthors();
+
+// Funkcja obsługująca kliknięcia w linki autorów
+function authorClickHandler(event){
+  // Zatrzymanie domyślnej akcji przeglądarki (np. nawigacji)
+  event.preventDefault();
+
+  // Pobranie elementu, który został kliknięty
+  const clickedElement = this;
+
+  // Pobranie adresu URL z atrybutu href klikniętego elementu
+  const href = clickedElement.getAttribute('href');
+
+  // Wyciągnięcie nazwy autora z URL (usunięcie części '#author-')
+  const author = href.replace('#author-', '');
+
+  // Usunięcie klasy 'active' ze wszystkich aktywnych linków autorów
+  const activeLinks = document.querySelectorAll('a.active[href^="#author-"]');
+  for (let activeLink of activeLinks) {
+    activeLink.classList.remove('active');
+  }
+
+  // Dodanie klasy 'active' do klikniętego linku autora
+  const selectedAuthorLinks = document.querySelectorAll(`a[href="${href}"]`);
+  for (let selectedAuthorLink of selectedAuthorLinks) {
+    selectedAuthorLink.classList.add('active');
+  }
+
+  // Wygenerowanie listy artykułów dla wybranego autora
+  generateTitleLinks(`[data-author="${author}"]`);
+}
+
+// Funkcja dodająca nasłuchiwacze zdarzeń do linków autorów
+function addClickListenersToAuthors(){
+  // Pobranie wszystkich linków autorów w artykułach
+  const authorLinks = document.querySelectorAll(`${optArticleAuthorSelector} a`);
+
+  // Dodanie nasłuchiwania zdarzenia 'click' dla każdego linku
+  for (let authorLink of authorLinks) {
+    authorLink.addEventListener('click', authorClickHandler);
+  }
+}
+
+// Wywołanie funkcji dodającej nasłuchiwacze do linków autorów
+addClickListenersToAuthors();
