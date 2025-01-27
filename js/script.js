@@ -5,7 +5,8 @@ const optArticleSelector = '.post',
       optTitleSelector = '.post-title',
       optTitleListSelector = '.titles',
       optArticleTagsSelector = '.post-tags .list',
-      optArticleAuthorSelector = '.post-author';
+      optArticleAuthorSelector = '.post-author',
+      optTagsListSelector = '.tags.list'; // Selector dla listy tagów w prawej kolumnie
 
 // Funkcja obsługująca kliknięcia w linki
 function titleClickHandler(event){
@@ -88,6 +89,9 @@ function generateTitleLinks(customSelector = ''){
 
 // Funkcja generująca tagi
 function generateTags() {
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = [];
+
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -112,6 +116,12 @@ function generateTags() {
 
       /* add generated code to html variable */
       html += tagHTML;
+
+            /* [NEW] check if this link is NOT already in allTags */
+            if (allTags.indexOf(tagHTML) == -1) {
+              /* [NEW] add generated code to allTags array */
+              allTags.push(tagHTML);
+            }      
     }
     /* END LOOP: for each tag */
 
@@ -119,6 +129,12 @@ function generateTags() {
     tagsWrapper.innerHTML = html;
   }
   /* END LOOP: for every article: */
+
+    /* [NEW] find list of tags in right column */
+    const tagList = document.querySelector(optTagsListSelector);
+
+    /* [NEW] add html from allTags to tagList */
+    tagList.innerHTML = allTags.join(' ');  
 }
 
 // Wywołanie funkcji
@@ -233,7 +249,7 @@ function addClickListenersToAuthors(){
   // Pobranie wszystkich linków autorów w artykułach
   const authorLinks = document.querySelectorAll(`${optArticleAuthorSelector} a`);
 
-  // Dodanie nasłuchiwania zdarzenia 'click' dla każdego linku
+  // Dodanie nasłuchiwania zdarzenia 'click' dla każdego linku 
   for (let authorLink of authorLinks) {
     authorLink.addEventListener('click', authorClickHandler);
   }

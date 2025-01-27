@@ -246,11 +246,11 @@
                 <aside class="sidebar" aria-label="Sidebar z tagami i autorami">
                     <h2 class="section-title">Tags</h2>
                     <ul class="list tags">
-                      <li>design <span>(6)</span></li>
+                      <!-- <li>design <span>(6)</span></li>
                       <li>code <span>(5)</span></li>
                       <li>tutorials <span>(4)</span></li>
                       <li>reviews <span>(4)</span></li>
-                      <li>news <span>(6)</span></li>
+                      <li>news <span>(6)</span></li> -->
                     </ul>
                     <h2 class="section-title">Authors</h2>
                     <ul class="list authors">
@@ -265,20 +265,102 @@
     </div>
 
     <script>
-        function showArticle(id) {
-            // Ukryj wszystkie artykuły
-            let articles = document.querySelectorAll('.post');
-            articles.forEach(function(article) {
-                article.classList.remove('active');
-            });
+        // Funkcja do pokazywania artykułów
+    function showArticle(articleId) {
+        const allArticles = document.querySelectorAll('.post');
+        allArticles.forEach(article => article.classList.remove('active'));
 
-            // Pokaż artykuł o danym id
-            let articleToShow = document.getElementById('article-' + id);
-            articleToShow.classList.add('active');
+        const activeArticle = document.getElementById('article-' + articleId);
+        if (activeArticle) {
+            activeArticle.classList.add('active');
+        }
+    }
+
+    // Funkcja generująca listę tagów (prawa kolumna)
+    function generateTags() {
+        const tagsList = document.querySelector('.list.tags');
+        const articles = document.querySelectorAll('.post');
+        const tags = {};
+
+        // Zbieranie tagów z data-tags
+        articles.forEach(article => {
+            const tagsString = article.getAttribute('data-tags');
+            if (tagsString) {
+                const tagsArray = tagsString.split(' ');
+                tagsArray.forEach(tag => {
+                    tags[tag] = (tags[tag] || 0) + 1;
+                });
+            }
+        });
+
+        // Dodawanie tagów do listy w prawej kolumnie
+        tagsList.innerHTML = '';
+        for (const [tag, count] of Object.entries(tags)) {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="javascript:void(0);" data-tag="${tag}">${tag} <span>(${count})</span></a>`;
+            tagsList.appendChild(li);
         }
 
+        // Dodanie event listenera do każdego tagu w prawej kolumnie
+        const tagLinks = tagsList.querySelectorAll('a');
+        tagLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                const tag = link.getAttribute('data-tag');
+                filterByTagInMiddleColumn(tag); // Filtrowanie artykułów w środkowej kolumnie
+            });
+        });
+    }
 
-            // Funkcja generująca listę autorów
+    // Funkcja filtrowania artykułów po tagu (środkowa kolumna)
+    function filterByTagInMiddleColumn(tag) {
+        const articles = document.querySelectorAll('.post');
+        articles.forEach(article => {
+            const tagsString = article.getAttribute('data-tags');
+            if (tagsString && tagsString.split(' ').includes(tag)) {
+                article.classList.add('active');
+            } else {
+                article.classList.remove('active');
+            }
+        });
+    }
+
+    // Funkcja aktualizująca lewą kolumnę na podstawie wybranego tagu (po kliknięciu w tag w środkowej kolumnie)
+    function updateSidebarWithTag(tag) {
+        const articles = Array.from(document.querySelectorAll('.post')).filter(article => {
+            const tagsString = article.getAttribute('data-tags');
+            return tagsString && tagsString.split(' ').includes(tag);
+        });
+
+        const titlesList = document.querySelector('.list.titles');
+        titlesList.innerHTML = ''; // Wyczyszczenie listy
+
+        articles.forEach(article => {
+            const title = article.querySelector('.post-title').textContent;
+            const articleId = article.id.split('-')[1];
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="javascript:void(0);" onclick="showArticle(${articleId})">${title}</a>`;
+            titlesList.appendChild(li);
+        });
+    }
+
+    // Funkcja dodająca event listeners do tagów w artykułach w środkowej kolumnie
+    function addTagClickListenersInMiddleColumn() {
+        const articles = document.querySelectorAll('.post');
+        articles.forEach(article => {
+            const tags = article.querySelectorAll('.tag-link'); // Zmieniliśmy na .tag-link, żeby dostać tagi w artykule
+            tags.forEach(tagElement => {
+                tagElement.addEventListener('click', function(event) {
+                    event.preventDefault(); // Zapobiegaj domyślnej akcji kliknięcia
+                    const tag = tagElement.textContent.trim(); // Pobierz nazwę tagu
+
+                    // Aktualizuj lewą kolumnę na podstawie wybranego tagu
+                    updateSidebarWithTag(tag); // Tylko lewa kolumna
+                });
+            });
+        });
+    }
+
+    // Funkcja generująca listę autorów (niezmieniona)
     function generateAuthors() {
         const authorsList = document.querySelector('.list.authors');
         const articles = document.querySelectorAll('.post');
@@ -292,12 +374,21 @@
             }
         });
 
-        // Dodawanie autorów do listy po prawej
+        // Dodawanie autorów do listy po lewej
         authorsList.innerHTML = '';
         authors.forEach(author => {
             const li = document.createElement('li');
-            li.innerHTML = `<a href="javascript:void(0);" onclick="filterByAuthor('${author}')">${author}</a>`;
+            li.innerHTML = `<a href="javascript:void(0);" data-author="${author}">${author}</a>`;
             authorsList.appendChild(li);
+        });
+
+        // Dodanie event listenera do każdego autora
+        const authorLinks = authorsList.querySelectorAll('a');
+        authorLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                const author = link.getAttribute('data-author');
+                filterByAuthor(author);
+            });
         });
     }
 
@@ -314,10 +405,32 @@
         });
     }
 
-    // Wygenerowanie listę autorów po załadowaniu strony
-    window.onload = function() {
+    // Wywołanie generowania tagów i autorów po załadowaniu strony
+    window.onload = function () {
+        generateTags();
         generateAuthors();
+        addTagClickListenersInMiddleColumn(); // Dodanie obsługi kliknięć w tagi w środkowej kolumnie
+        showArticle(1); // Domyślnie wyświetlamy pierwszy artykuł
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
     </script>
 </body>
