@@ -360,27 +360,27 @@
         });
     }
 
-    // Funkcja generująca listę autorów (niezmieniona)
+    // Funkcja generująca listę autorów z licznikami (prawa kolumna)
     function generateAuthors() {
         const authorsList = document.querySelector('.list.authors');
         const articles = document.querySelectorAll('.post');
-        const authors = new Set();
+        const authors = {};
 
         // Zbieranie autorów z data-author
         articles.forEach(article => {
             const author = article.getAttribute('data-author');
             if (author) {
-                authors.add(author);
+                authors[author] = (authors[author] || 0) + 1;
             }
         });
 
-        // Dodawanie autorów do listy po lewej
+        // Dodawanie autorów do listy w prawej kolumnie
         authorsList.innerHTML = '';
-        authors.forEach(author => {
+        for (const [author, count] of Object.entries(authors)) {
             const li = document.createElement('li');
-            li.innerHTML = `<a href="javascript:void(0);" data-author="${author}">${author}</a>`;
+            li.innerHTML = `<a href="javascript:void(0);" data-author="${author}">${author} <span>(${count})</span></a>`;
             authorsList.appendChild(li);
-        });
+        }
 
         // Dodanie event listenera do każdego autora
         const authorLinks = authorsList.querySelectorAll('a');
@@ -412,25 +412,6 @@
         addTagClickListenersInMiddleColumn(); // Dodanie obsługi kliknięć w tagi w środkowej kolumnie
         showArticle(1); // Domyślnie wyświetlamy pierwszy artykuł
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         
     </script>
 </body>
