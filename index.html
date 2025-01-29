@@ -293,13 +293,28 @@
             }
         });
 
-        // Dodawanie tagów do listy w prawej kolumnie
+
+
+        // Znalezienie minimalnej i maksymalnej liczby wystąpień
+        const counts = Object.values(tags);
+        const minCount = Math.min(...counts);
+        const maxCount = Math.max(...counts);
+
+        // Zakres rozmiarów czcionki (w pikselach)
+        const minFontSize = 12;
+        const maxFontSize = 24;
+
+        // Dodawanie tagów do listy w prawej kolumnie z dynamicznymi rozmiarami
         tagsList.innerHTML = '';
         for (const [tag, count] of Object.entries(tags)) {
+            // Skalowanie rozmiaru czcionki w zależności od liczby wystąpień
+            const fontSize = minFontSize + ((count - minCount) / (maxCount - minCount)) * (maxFontSize - minFontSize);
+
             const li = document.createElement('li');
-            li.innerHTML = `<a href="javascript:void(0);" data-tag="${tag}">${tag} <span>(${count})</span></a>`;
+            li.innerHTML = `<a href="javascript:void(0);" data-tag="${tag}" style="font-size: ${fontSize}px;">${tag} <span>(${count})</span></a>`;
             tagsList.appendChild(li);
         }
+
 
         // Dodanie event listenera do każdego tagu w prawej kolumnie
         const tagLinks = tagsList.querySelectorAll('a');
