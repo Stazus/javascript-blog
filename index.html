@@ -6,6 +6,7 @@
     <meta name="description" content="Podstawowa struktura dokumentu HTML">
     <meta name="author" content="Twoje Imię">
     <title>Podstawowa Strona</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* Ukryj wszystkie artykuły poza tym, który jest aktualnie wyświetlany */
@@ -66,176 +67,176 @@
                 <aside class="sidebar" aria-label="Sidebar with post titles">
                     <h2 class="section-title">All posts</h2>
                     <ul class="list titles">
-                        <li><a href="javascript:void(0);" onclick="showArticle(1)">Article 1</a></li>
-                        <li><a href="javascript:void(0);" onclick="showArticle(2)">Article 2</a></li>
-                        <li><a href="javascript:void(0);" onclick="showArticle(3)">Article 3</a></li>
-                        <li><a href="javascript:void(0);" onclick="showArticle(4)">Article 4</a></li>
-                        <li><a href="javascript:void(0);" onclick="showArticle(5)">Article 5</a></li>
-                        <li><a href="javascript:void(0);" onclick="showArticle(6)">Article 6</a></li>
-                        <li><a href="javascript:void(0);" onclick="showArticle(7)">Article 7</a></li>
-                        <li><a href="javascript:void(0);" onclick="showArticle(8)">Article 8</a></li>
-                        <li><a href="javascript:void(0);" onclick="showArticle(9)">Article 9</a></li>
-                        <li><a href="javascript:void(0);" onclick="showArticle(10)">Article 10</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="1">Article 1</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="2">Article 2</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="3">Article 3</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="4">Article 4</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="5">Article 5</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="6">Article 6</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="7">Article 7</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="8">Article 8</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="9">Article 9</a></li>
+                        <li><a href="javascript:void(0);" class="article-link" data-id="10">Article 10</a></li>
                     </ul>
                 </aside>
                 <section class="posts" aria-label="Blog posts">
                     <!-- Article 1 -->
                     <article class="post active" id="article-1" data-tags="cat cactus scissors" data-author="Marion Berry">
                         <h3 class="post-title">Article 1</h3>
-                        <p class="post-author">by Marion Berry</p>
+                        <p class="post-author">by <span class="author-name">Marion Berry</span></p>
                         <div class="post-content">
                             <p>Duis non dolor efficitur erat interdum fringilla a lobortis dolor. Cras mattis malesuada odio a scelerisque. Curabitur sit amet urna libero. Nunc vel justo nisi. Curabitur suscipit vehicula ante, ut fringilla libero fermentum eu. Morbi fringilla tincidunt felis. Suspendisse potenti. Sed volutpat justo ut felis fermentum maximus. Maecenas auctor quam et nisl rhoncus, vel consectetur odio vestibulum. Cras molestie sit amet erat non tincidunt. Pellentesque ac dui sit amet dui vehicula euismod non non est.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">cat</a></li>
-                                <li><a href="#" class="tag-link">cactus</a></li>
-                                <li><a href="#" class="tag-link">scissors</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="cat">cat</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="cactus">cactus</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="scissors">scissors</a></li>
                             </ul>
                         </div>
                     </article>
                     <!-- Article 2 -->
                     <article class="post" id="article-2" data-tags="design tutorial tools" data-author="Theo Tabby">
                         <h3 class="post-title">Article 2</h3>
-                        <p class="post-author">by Theo Tabby</p>
+                        <p class="post-author">by <span class="author-name">Theo Tabby</span></p>
                         <div class="post-content">
                             <p>Phasellus sollicitudin, arcu vel iaculis ullamcorper, sapien ipsum faucibus neque, in pharetra libero nulla sit amet lorem. Nunc sollicitudin venenatis eros, at posuere lorem cursus vitae. Cras vitae lacinia nunc. Aenean posuere turpis sem, sit amet vulputate nunc auctor sed. Vivamus bibendum, metus at scelerisque tempus, urna ipsum aliquet elit, non sodales turpis odio vel dui. Sed feugiat id magna et pharetra. Nunc molestie viverra risus sit amet efficitur. Fusce tristique libero a ultricies pharetra. Ut interdum purus vitae ex mollis, eget tincidunt libero convallis.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">design</a></li>
-                                <li><a href="#" class="tag-link">tutorial</a></li>
-                                <li><a href="#" class="tag-link">tools</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="design">design</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="tutorial">tutorial</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="tools">tools</a></li>
                             </ul>
                         </div>
                     </article>
                     <!-- Article 3 -->
                     <article class="post" id="article-3" data-tags="code javascript css" data-author="Kitty Toebean">
                         <h3 class="post-title">Article 3</h3>
-                        <p class="post-author">by Kitty Toebean</p>
+                        <p class="post-author">by <span class="author-name">Kitty Toebean</span></p>
                         <div class="post-content">
                             <p>Nullam auctor, tortor et varius consectetur, massa ligula congue dolor, nec rutrum felis purus et orci. Morbi dapibus mauris sed augue luctus tincidunt. Etiam a turpis bibendum, ultricies enim ac, viverra lectus. Integer laoreet eros leo, vitae vehicula urna suscipit nec. Aenean ut est ut odio eleifend aliquam non vel eros. Ut id ante lacinia, tristique odio id, vehicula sem. Aenean sit amet consectetur erat, ac auctor urna. Maecenas interdum velit sed felis consectetur volutpat.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">code</a></li>
-                                <li><a href="#" class="tag-link">javascript</a></li>
-                                <li><a href="#" class="tag-link">css</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="code">code</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="javascript">javascript</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="css">css</a></li>
                             </ul>
                         </div>
                     </article>
                     <!-- Article 4 -->
                     <article class="post" id="article-4" data-tags="reviews gadgets innovation" data-author="George Tuxedo">
                         <h3 class="post-title">Article 4</h3>
-                        <p class="post-author">by George Tuxedo</p>
+                        <p class="post-author">by <span class="author-name">George Tuxedo</span></p>
                         <div class="post-content">
                             <p>Aenean commodo massa nec sem sodales, at malesuada arcu aliquam. Nunc sit amet malesuada lectus. Vivamus ut risus fringilla, tristique ante et, elementum turpis. Integer viverra erat et eros facilisis convallis. Donec ultricies neque nisl, a tempus lorem auctor et. Etiam feugiat leo ac quam interdum pharetra. Donec sollicitudin mi vel nulla euismod, ac pharetra tortor auctor. Vivamus rutrum odio et ante feugiat, ac lobortis felis volutpat. Duis laoreet felis euismod erat aliquet convallis.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">reviews</a></li>
-                                <li><a href="#" class="tag-link">gadgets</a></li>
-                                <li><a href="#" class="tag-link">innovation</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="reviews">reviews</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="gadgets">gadgets</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="innovation">innovation</a></li>
                             </ul>
                         </div>
                     </article>
                     <!-- Article 5 -->
                     <article class="post" id="article-5" data-tags="tutorials beginners tools" data-author="Marion Berry">
                         <h3 class="post-title">Article 5</h3>
-                        <p class="post-author">by Marion Berry</p>
+                        <p class="post-author">by <span class="author-name">Marion Berry</span></p>
                         <div class="post-content">
                             <p>Donec et ligula id mauris eleifend convallis sed nec magna. Morbi faucibus dolor in lectus fermentum, ac feugiat elit blandit. Curabitur sollicitudin neque id nisl hendrerit, ut vestibulum augue varius. Aenean eu arcu ut elit venenatis malesuada. Integer sollicitudin augue vel est malesuada tristique. Ut auctor dolor id ipsum lobortis, sed gravida nisi pretium. Curabitur a felis ac neque gravida condimentum et ut justo. Suspendisse potenti. Mauris interdum odio at massa tincidunt, eu convallis velit tristique.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">tutorials</a></li>
-                                <li><a href="#" class="tag-link">beginners</a></li>
-                                <li><a href="#" class="tag-link">tools</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="tutorials">tutorials</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="beginners">beginners</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="tools">tools</a></li>
                             </ul>
                         </div>
                     </article>
                     <!-- Article 6 -->
                     <article class="post" id="article-6" data-tags="news javascript trends" data-author="Marion Berry">
                         <h3 class="post-title">Article 6</h3>
-                        <p class="post-author">by Marion Berry</p>
+                        <p class="post-author">by <span class="author-name">Marion Berry</span></p>
                         <div class="post-content">
                             <p>Praesent quis erat auctor, laoreet ipsum id, iaculis enim. Maecenas ut suscipit nunc. Donec vitae mauris ut enim hendrerit consectetur ac non libero. Nulla euismod lorem turpis, eget suscipit enim facilisis sit amet. Etiam quis lacinia sapien. Nulla ac volutpat velit, nec interdum tortor. Aliquam erat volutpat. Vivamus sodales eget arcu vel laoreet. Fusce molestie metus sed efficitur fermentum. Cras sed nibh vitae eros maximus vulputate nec nec libero. Integer auctor lectus sit amet nulla scelerisque, a viverra neque iaculis.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">news</a></li>
-                                <li><a href="#" class="tag-link">javascript</a></li>
-                                <li><a href="#" class="tag-link">trends</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="news">news</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="javascript">javascript</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="trends">trends</a></li>
                             </ul>
                         </div>
                     </article>
                     <!-- Article 7 -->
                     <article class="post" id="article-7" data-tags="innovation reviews future" data-author="Theo Tabby">
                         <h3 class="post-title">Article 7</h3>
-                        <p class="post-author">by Theo Tabby</p>
+                        <p class="post-author">by <span class="author-name">Theo Tabby</span></p>
                         <div class="post-content">
                             <p>Suspendisse potenti. Quisque suscipit ex ac lectus fermentum, nec suscipit erat luctus. Etiam volutpat turpis velit, non luctus elit mollis et. In id sapien nulla. Donec aliquam euismod ultricies. Nam eu quam nisl. In tincidunt fermentum risus, ac auctor magna viverra ac. Suspendisse ut augue ut eros pharetra luctus a a lacus. Etiam fermentum, tortor at consequat tincidunt, felis libero sodales turpis, in interdum libero nulla at leo. Sed vitae neque volutpat, tempus nisi ac, laoreet ligula.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">innovation</a></li>
-                                <li><a href="#" class="tag-link">reviews</a></li>
-                                <li><a href="#" class="tag-link">future</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="innovation">innovation</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="reviews">reviews</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="future">future</a></li>
                             </ul>
                         </div>
                     </article>
                     <!-- Article 8 -->
                     <article class="post" id="article-8" data-tags="cat gadgets coding" data-author="Kitty Toebean">
                         <h3 class="post-title">Article 8</h3>
-                        <p class="post-author">by Kitty Toebean</p>
+                        <p class="post-author">by <span class="author-name">Kitty Toebean</span></p>
                         <div class="post-content">
                             <p>Aliquam fringilla lacus vel libero ultrices, ut egestas libero congue. Ut varius, nulla at interdum condimentum, ante ligula sodales nisi, vel tincidunt odio odio vel ligula. Phasellus vitae libero et ligula interdum sodales. Integer id pharetra nulla. Donec vestibulum, nunc a laoreet auctor, felis enim cursus ante, ut posuere urna felis nec sapien. Suspendisse potenti. Pellentesque nec orci vel ante sollicitudin luctus. Integer laoreet, dui ac vestibulum placerat, urna elit lacinia metus, non tempor libero magna vitae mauris.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">cat</a></li>
-                                <li><a href="#" class="tag-link">gadgets</a></li>
-                                <li><a href="#" class="tag-link">coding</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="cat">cat</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="gadgets">gadgets</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="coding">coding</a></li>
                             </ul>
                         </div>
                     </article>
                     <!-- Article 9 -->
                     <article class="post" id="article-9" data-tags="reviews javascript tools" data-author="George Tuxedo">
                         <h3 class="post-title">Article 9</h3>
-                        <p class="post-author">by George Tuxedo</p>
+                        <p class="post-author">by <span class="author-name">George Tuxedo</span></p>
                         <div class="post-content">
                             <p>Ut aliquet elit non ex sagittis bibendum. Etiam eu leo auctor, interdum eros vel, blandit urna. In faucibus risus sit amet ligula vehicula, nec mollis felis tincidunt. Sed vel sollicitudin justo. Integer gravida mauris ut augue gravida tincidunt. Curabitur vulputate, sapien nec rhoncus pharetra, leo tortor auctor augue, a pharetra felis libero nec tortor. Nullam convallis vulputate orci, ac maximus metus pharetra ut.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">reviews</a></li>
-                                <li><a href="#" class="tag-link">javascript</a></li>
-                                <li><a href="#" class="tag-link">tools</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="reviews">reviews</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="javascript">javascript</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="tools">tools</a></li>
                             </ul>
                         </div>
                     </article>
                     <!-- Article 10 -->
                     <article class="post" id="article-10" data-tags="design innovation gadgets" data-author="Marion Berry">
                         <h3 class="post-title">Article 10</h3>
-                        <p class="post-author">by Marion Berry</p>
+                        <p class="post-author">by <span class="author-name">Marion Berry</span></p>
                         <div class="post-content">
                             <p>Fusce tempor neque ut leo pretium, id dignissim neque feugiat. Sed efficitur ante sapien, nec tristique sem feugiat id. Nam sit amet risus varius, suscipit lectus at, gravida augue. Ut eleifend suscipit eros, ac gravida velit interdum sed. Aliquam tincidunt, eros euismod faucibus facilisis, nunc felis tincidunt arcu, sed porttitor velit odio at orci. Aenean nec mi eu orci condimentum venenatis at ut magna. Integer vehicula dui ac eros hendrerit sollicitudin.</p>
                         </div>
                         <div class="post-tags">
                             <p><strong>Tags:</strong></p>
                             <ul class="list list-horizontal">
-                                <li><a href="#" class="tag-link">design</a></li>
-                                <li><a href="#" class="tag-link">innovation</a></li>
-                                <li><a href="#" class="tag-link">gadgets</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="design">design</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="innovation">innovation</a></li>
+                                <li><a href="javascript:void(0);" class="tag-link" data-tag="gadgets">gadgets</a></li>
                             </ul>
                         </div>
                     </article>
@@ -264,170 +265,185 @@
         </div>
     </div>
 
-    <script>
-        // Funkcja do pokazywania artykułów
-    function showArticle(articleId) {
-        const allArticles = document.querySelectorAll('.post');
-        allArticles.forEach(article => article.classList.remove('active'));
+    <!-- Szablon dla linku do artykułu (lewa kolumna) -->
 
-        const activeArticle = document.getElementById('article-' + articleId);
-        if (activeArticle) {
-            activeArticle.classList.add('active');
-        }
+<script id="template-article-link" type="text/x-handlebars-template">
+    <li><a href="javascript:void(0);" class="article-link" data-id="{{id}}"><span>{{title}}</span></a></li>
+</script>
+
+  <!-- Szablon dla linku do tagu (pod artykułem) -->
+  <script id="template-tag-link" type="text/x-handlebars-template">
+    <a href="javascript:void(0);" class="tag-link" data-tag="{{ tag }}">{{ tag }}</a>
+  </script>
+
+  <!-- Szablon dla linku do autora (pod tytułem artykułu) -->
+  <script id="template-author-link" type="text/x-handlebars-template">
+    <a href="javascript:void(0);" class="author-link" data-author="{{ author }}">{{ author }}</a>
+  </script>
+
+  <!-- Szablon dla chmury tagów (prawa kolumna) -->
+  <script id="template-tag-cloud" type="text/x-handlebars-template">
+    {{#each tags}}
+      <li>
+        <a href="javascript:void(0);" class="tag-link" data-tag="{{ tag }}" style="font-size: {{ fontSize }}px;">
+          {{ tag }} <span>({{ count }})</span>
+        </a>
+      </li>
+    {{/each}}
+  </script>
+
+  <!-- Szablon dla listy autorów (prawa kolumna) -->
+  <script id="template-author-list" type="text/x-handlebars-template">
+    {{#each authors}}
+      <li>
+        <a href="javascript:void(0);" class="author-link" data-author="{{ author }}">
+          {{ author }} <span>({{ count }})</span>
+        </a>
+      </li>
+    {{/each}}
+  </script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+// Funkcja do pokazania artykułu
+function showArticle(articleId) {
+    // Ukrywanie wszystkich artykułów
+    document.querySelectorAll('.post').forEach(article => article.classList.remove('active'));
+
+    // Znajdowanie i wyświetlanie odpowiedniego artykułu
+    const activeArticle = document.getElementById('article-' + articleId);
+    if (activeArticle) {
+        activeArticle.classList.add('active');
     }
+}
 
-    // Funkcja generująca listę tagów (prawa kolumna)
-    function generateTags() {
-        const tagsList = document.querySelector('.list.tags');
-        const articles = document.querySelectorAll('.post');
-        const tags = {};
+// Delegowanie zdarzenia kliknięcia na linki artykułów w lewej kolumnie
+document.querySelector('.list.titles').addEventListener('click', function (event) {
+    // Sprawdzamy, czy kliknięto link w lewej kolumnie
+    if (event.target && event.target.classList.contains('article-link')) {
+        event.preventDefault(); // Zapobiegamy domyślnej akcji (czyli przeładowaniu strony)
+        const articleId = event.target.getAttribute('data-id'); // Pobieramy ID artykułu
+        showArticle(articleId); // Wywołujemy funkcję do pokazania artykułu
+    }
+});
 
-        // Zbieranie tagów z data-tags
-        articles.forEach(article => {
-            const tagsString = article.getAttribute('data-tags');
-            if (tagsString) {
-                const tagsArray = tagsString.split(' ');
-                tagsArray.forEach(tag => {
-                    tags[tag] = (tags[tag] || 0) + 1;
-                });
-            }
-        });
+// Funkcja generująca tagi
+function generateTags() {
+    const tagsList = document.querySelector('.list.tags');
+    const articles = document.querySelectorAll('.post');
+    const tags = {};
 
-
-
-        // Znalezienie minimalnej i maksymalnej liczby wystąpień
-        const counts = Object.values(tags);
-        const minCount = Math.min(...counts);
-        const maxCount = Math.max(...counts);
-
-        // Zakres rozmiarów czcionki (w pikselach)
-        const minFontSize = 12;
-        const maxFontSize = 24;
-
-        // Dodawanie tagów do listy w prawej kolumnie z dynamicznymi rozmiarami
-        tagsList.innerHTML = '';
-        for (const [tag, count] of Object.entries(tags)) {
-            // Skalowanie rozmiaru czcionki w zależności od liczby wystąpień
-            const fontSize = minFontSize + ((count - minCount) / (maxCount - minCount)) * (maxFontSize - minFontSize);
-
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="javascript:void(0);" data-tag="${tag}" style="font-size: ${fontSize}px;">${tag} <span>(${count})</span></a>`;
-            tagsList.appendChild(li);
-        }
-
-
-        // Dodanie event listenera do każdego tagu w prawej kolumnie
-        const tagLinks = tagsList.querySelectorAll('a');
-        tagLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                const tag = link.getAttribute('data-tag');
-                filterByTagInMiddleColumn(tag); // Filtrowanie artykułów w środkowej kolumnie
+    articles.forEach(article => {
+        const tagsString = article.getAttribute('data-tags');
+        if (tagsString) {
+            tagsString.split(' ').forEach(tag => {
+                tags[tag] = (tags[tag] || 0) + 1;
             });
-        });
-    }
-
-    // Funkcja filtrowania artykułów po tagu (środkowa kolumna)
-    function filterByTagInMiddleColumn(tag) {
-        const articles = document.querySelectorAll('.post');
-        articles.forEach(article => {
-            const tagsString = article.getAttribute('data-tags');
-            if (tagsString && tagsString.split(' ').includes(tag)) {
-                article.classList.add('active');
-            } else {
-                article.classList.remove('active');
-            }
-        });
-    }
-
-    // Funkcja aktualizująca lewą kolumnę na podstawie wybranego tagu (po kliknięciu w tag w środkowej kolumnie)
-    function updateSidebarWithTag(tag) {
-        const articles = Array.from(document.querySelectorAll('.post')).filter(article => {
-            const tagsString = article.getAttribute('data-tags');
-            return tagsString && tagsString.split(' ').includes(tag);
-        });
-
-        const titlesList = document.querySelector('.list.titles');
-        titlesList.innerHTML = ''; // Wyczyszczenie listy
-
-        articles.forEach(article => {
-            const title = article.querySelector('.post-title').textContent;
-            const articleId = article.id.split('-')[1];
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="javascript:void(0);" onclick="showArticle(${articleId})">${title}</a>`;
-            titlesList.appendChild(li);
-        });
-    }
-
-    // Funkcja dodająca event listeners do tagów w artykułach w środkowej kolumnie
-    function addTagClickListenersInMiddleColumn() {
-        const articles = document.querySelectorAll('.post');
-        articles.forEach(article => {
-            const tags = article.querySelectorAll('.tag-link'); // Zmieniliśmy na .tag-link, żeby dostać tagi w artykule
-            tags.forEach(tagElement => {
-                tagElement.addEventListener('click', function(event) {
-                    event.preventDefault(); // Zapobiegaj domyślnej akcji kliknięcia
-                    const tag = tagElement.textContent.trim(); // Pobierz nazwę tagu
-
-                    // Aktualizuj lewą kolumnę na podstawie wybranego tagu
-                    updateSidebarWithTag(tag); // Tylko lewa kolumna
-                });
-            });
-        });
-    }
-
-    // Funkcja generująca listę autorów z licznikami (prawa kolumna)
-    function generateAuthors() {
-        const authorsList = document.querySelector('.list.authors');
-        const articles = document.querySelectorAll('.post');
-        const authors = {};
-
-        // Zbieranie autorów z data-author
-        articles.forEach(article => {
-            const author = article.getAttribute('data-author');
-            if (author) {
-                authors[author] = (authors[author] || 0) + 1;
-            }
-        });
-
-        // Dodawanie autorów do listy w prawej kolumnie
-        authorsList.innerHTML = '';
-        for (const [author, count] of Object.entries(authors)) {
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="javascript:void(0);" data-author="${author}">${author} <span>(${count})</span></a>`;
-            authorsList.appendChild(li);
         }
+    });
 
-        // Dodanie event listenera do każdego autora
-        const authorLinks = authorsList.querySelectorAll('a');
-        authorLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                const author = link.getAttribute('data-author');
-                filterByAuthor(author);
-            });
+    const counts = Object.values(tags);
+    const minCount = Math.min(...counts);
+    const maxCount = Math.max(...counts);
+    const minFontSize = 12, maxFontSize = 24;
+
+    const template = Handlebars.compile(document.getElementById('template-tag-cloud').innerHTML);
+    tagsList.innerHTML = template({
+        tags: Object.entries(tags).map(([tag, count]) => ({
+            tag,
+            count,
+            fontSize: minFontSize + ((count - minCount) / (maxCount - minCount)) * (maxFontSize - minFontSize)
+        }))
+    });
+}
+
+// Funkcja generująca listę autorów
+function generateAuthors() {
+    const authorsList = document.querySelector('.list.authors');
+    const articles = document.querySelectorAll('.post');
+    const authors = {};
+
+    articles.forEach(article => {
+        const author = article.getAttribute('data-author');
+        if (author) {
+            authors[author] = (authors[author] || 0) + 1;
+        }
+    });
+
+    const template = Handlebars.compile(document.getElementById('template-author-list').innerHTML);
+    authorsList.innerHTML = template({ authors: Object.entries(authors).map(([author, count]) => ({ author, count })) });
+}
+
+// Funkcja filtrująca artykuły po tagu
+function filterByTag(tag) {
+    document.querySelectorAll('.post').forEach(article => {
+        article.classList.toggle('active', article.getAttribute('data-tags')?.split(' ').includes(tag));
+    });
+    updateSidebarWithTag(tag);
+}
+
+// Funkcja aktualizująca lewą kolumnę po tagu
+function updateSidebarWithTag(tag) {
+    const articles = Array.from(document.querySelectorAll('.post'))
+        .filter(article => article.getAttribute('data-tags')?.split(' ').includes(tag));
+
+    const titlesList = document.querySelector('.list.titles');
+    titlesList.innerHTML = '';
+
+    const template = Handlebars.compile(document.getElementById('template-article-link').innerHTML);
+    articles.forEach(article => {
+        titlesList.innerHTML += template({
+            id: article.id.split('-')[1], // Usuwanie 'article-' z ID
+            title: article.querySelector('.post-title').textContent
         });
-    }
+    });
 
-    // Funkcja filtrowania artykułów po autorze
-    function filterByAuthor(author) {
-        const articles = document.querySelectorAll('.post');
-        articles.forEach(article => {
-            const articleAuthor = article.getAttribute('data-author');
-            if (articleAuthor === author) {
-                article.classList.add('active');
-            } else {
-                article.classList.remove('active');
-            }
+    // Ponowne przypisanie nasłuchiwacza do nowo dodanych linków
+    attachLinkClickListeners();
+}
+
+// Funkcja filtrująca artykuły po autorze
+function filterByAuthor(author) {
+    document.querySelectorAll('.post').forEach(article => {
+        article.classList.toggle('active', article.getAttribute('data-author') === author);
+    });
+}
+
+// Nasłuchujemy kliknięcia na linki tagów i autorów
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('tag-link')) {
+        event.preventDefault();
+        filterByTag(event.target.dataset.tag);
+    }
+    if (event.target.classList.contains('author-link')) {
+        event.preventDefault();
+        filterByAuthor(event.target.dataset.author);
+    }
+});
+
+// Funkcja przypisująca nasłuchiwacz do linków artykułów
+function attachLinkClickListeners() {
+    document.querySelectorAll('.article-link').forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            const articleId = link.getAttribute('data-id');
+            showArticle(articleId);
         });
-    }
+    });
+}
 
-    // Wywołanie generowania tagów i autorów po załadowaniu strony
-    window.onload = function () {
-        generateTags();
-        generateAuthors();
-        addTagClickListenersInMiddleColumn(); // Dodanie obsługi kliknięć w tagi w środkowej kolumnie
-        showArticle(1); // Domyślnie wyświetlamy pierwszy artykuł
-    };
-        
-    </script>
+// Generujemy tagi i autorów
+generateTags();
+generateAuthors();
+
+// Przypisujemy nasłuchiwacze do początkowych linków
+attachLinkClickListeners();
+
+// Domyślnie pokazujemy pierwszy artykuł
+showArticle(1);
+});
+  </script>
+
 </body>
 </html>
